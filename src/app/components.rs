@@ -5,6 +5,7 @@ pub mod dashboard_widget;
 pub mod edit_person_modal;
 pub mod header;
 pub mod person_row;
+pub mod show_person_modal;
 pub mod toast;
 
 pub use add_person_modal::AddPersonModal;
@@ -14,6 +15,7 @@ pub use dashboard_widget::DashboardWidget;
 pub use edit_person_modal::EditPersonModal;
 pub use header::Header;
 pub use person_row::PersonRow;
+pub use show_person_modal::ShowPersonModal;
 pub use toast::Toast;
 pub use toast::ToastMessage;
 pub use toast::ToastMessageType;

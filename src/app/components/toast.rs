@@ -2,8 +2,8 @@ use std::time::Duration;
 
 use leptos::{component, create_effect, set_timeout, view, IntoView, ReadSignal, WriteSignal};
 
-const TOAST_PARENT_STYLE: &str = "flex flex-row top-0 h-16 w-full max-w-[61rem] mx-auto items-center justify-center align-center fixed -mt-36 transition-all duration-1000 ease-in-out";
-const TOAST_PARENT_APPEAR_STYLE: &str = "flex flex-row top-0 h-16 w-full max-w-[61rem] mx-auto items-center justify-center align-center fixed mt-20 transition-all duration-1000 ease-in-out";
+const TOAST_PARENT_STYLE: &str = "flex flex-row top-0 h-16 w-full max-w-[61rem] mx-auto items-center justify-center align-middle fixed -mt-36 transition-all duration-1000 ease-in-out";
+const TOAST_PARENT_APPEAR_STYLE: &str = "flex flex-row top-0 h-16 w-full max-w-[61rem] mx-auto items-center justify-center align-middle fixed mt-20 transition-all duration-1000 ease-in-out";
 const TOAST_STYLE: &str = "flex w-96 h-16 bg-[#333333] rounded px-10 py-4 text-white -mt-36 transition-all duration-1000 ease-in-out items-center";
 
 pub enum ToastMessageType {

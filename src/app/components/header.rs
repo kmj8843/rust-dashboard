@@ -23,7 +23,7 @@ pub fn Header() -> impl IntoView {
     });
 
     view! {
-        <div class="flex fixed top-0 items-center px-20 pt-8 mx-auto w-full h-12 align-center">
+        <div class="flex fixed top-0 items-center px-20 pt-8 mx-auto w-full h-12 align-middle">
             <nav class="flex flex-row w-full h-12 max-w-[52rem]">
                 <div class=move || get_style_from_url(&current_path, "/")>
                     <A href="/">"Dashboard"</A>

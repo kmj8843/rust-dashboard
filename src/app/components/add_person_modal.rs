@@ -1,9 +1,13 @@
 use leptos::{
-    component, create_signal, event_target_value, spawn_local, view, IntoView, Show, WriteSignal,
+    component, create_signal, event_target_value, spawn_local, view, IntoView, Resource,
+    ServerFnError, Show, WriteSignal,
 };
 use validator::Validate;
 
-use crate::app::{models::AddPersonRequest, server_functions::persons::add_person};
+use crate::app::{
+    models::{AddPersonRequest, Person},
+    server_functions::persons::add_person,
+};
 
 use super::{Toast, ToastMessage, ToastMessageType};
 
@@ -12,6 +16,7 @@ pub fn AddPersonModal(
     set_if_show_modal: WriteSignal<bool>,
     set_if_show_added: WriteSignal<bool>,
     set_toast_message: WriteSignal<ToastMessage>,
+    person_resource: Resource<(), Result<Vec<Person>, ServerFnError>>,
 ) -> impl IntoView {
     const INPUT_STYLE: &str = "w-full h-12 bg-[#333333] pr-4 pl-6 py-4 text-white mt-6 outline-none focus:outline:none focus:pl-7 transition-all duration-1000 ease-in-out";
     const CANCLE_BUTTON_STYLE: &str = "mt-10 bg-[#555555] px-8 py-2 rounded text-white mr-3 transition-all duration-1000 ease-in-out hover:bg-[#666666]";
@@ -47,6 +52,7 @@ pub fn AddPersonModal(
 
                 match add_result {
                     Ok(_added_person) => {
+                        person_resource.refetch();
                         set_if_show_modal(false);
 
                         set_toast_message(ToastMessage::create(ToastMessageType::NewMemberAdded));

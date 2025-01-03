@@ -60,7 +60,7 @@ impl AddPersonRequest {
 
 #[derive(Debug, Validate, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct EditPersonRequest {
-    #[validate(length(min = 1, message = "name is required"))]
+    #[validate(length(min = 1, message = "id is required"))]
     pub uuid: String,
     #[validate(length(min = 1, message = "title is required"))]
     pub title: String,
@@ -78,5 +78,17 @@ impl EditPersonRequest {
             level,
             compensation,
         }
+    }
+}
+
+#[derive(Debug, Validate, Deserialize, Serialize, PartialEq, Eq, Clone)]
+pub struct DeletePersonRequest {
+    #[validate(length(min = 1, message = "id is required"))]
+    pub uuid: String,
+}
+
+impl DeletePersonRequest {
+    pub fn new(uuid: String) -> DeletePersonRequest {
+        DeletePersonRequest { uuid }
     }
 }

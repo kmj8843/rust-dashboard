@@ -23,7 +23,7 @@ pub fn TeamPage() -> impl IntoView {
     let on_click = move |_| set_if_show_modal(!if_show_modal());
 
     view! {
-        <div class="justify-center items-center mx-auto w-full max-w-[64rem] align-center">
+        <div class="justify-center items-center mx-auto w-full max-w-[64rem] align-middle">
             <Header />
 
             <Toast toast_message if_appear=if_show_toast set_if_appear=set_if_show_toast />
@@ -35,6 +35,7 @@ pub fn TeamPage() -> impl IntoView {
                             set_if_show_modal
                             set_if_show_added=set_if_show_toast
                             set_toast_message
+                            person_resource=get_persons_info
                         />
                     </Show>
                     <div class="flex flex-row w-full max-w-[52rem]">
@@ -46,27 +47,33 @@ pub fn TeamPage() -> impl IntoView {
                     </div>
 
                     <Suspense fallback=move || {
-                        view! {
-                            <p>"Loading..."</p>
-                        }
+                        view! { <p>"Loading..."</p> }
                     }>
                         <div class="flex flex-col w-full max-w-[52rem] mt-6">
-                            {
-                                move || {
-                                    get_persons_info.get().map(|data| {
+                            {move || {
+                                get_persons_info
+                                    .get()
+                                    .map(|data| {
                                         match data {
                                             Ok(persons_data) => {
-                                                persons_data.iter().map(|each_person| view! {
-                                                    <PersonRow person=Rc::new(each_person.clone()) />
-                                                }).collect_view()
-                                            },
-                                            Err(_) => {
-                                                view! { <div></div> }.into_view()
+                                                persons_data
+                                                    .iter()
+                                                    .map(|each_person| {
+                                                        view! {
+                                                            <PersonRow
+                                                                person=Rc::new(each_person.clone())
+                                                                person_resource=get_persons_info
+                                                                set_if_show_toast
+                                                                set_toast_message
+                                                            />
+                                                        }
+                                                    })
+                                                    .collect_view()
                                             }
+                                            Err(_) => view! { <div></div> }.into_view(),
                                         }
                                     })
-                                }
-                            }
+                            }}
                         </div>
                     </Suspense>
                 </div>

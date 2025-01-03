@@ -63,8 +63,10 @@ pub fn DashboardChart(persons_data: Vec<Person>) -> impl IntoView {
             </div>
 
             <div class="max-w-[54rem] mx-auto w-full flex flex-col mt-14 pb-12">
-                <div class="w-full max-w-[41rem] h-20 bg-black-200 rounded py-10 px-4 pb-10" inner_html=&bar_chart.svg().unwrap()>
-                </div>
+                <div
+                    class="w-full max-w-[41rem] h-20 bg-black-200 rounded py-10 px-4 pb-10"
+                    inner_html=&bar_chart.svg().unwrap()
+                ></div>
             </div>
         </div>
     }
